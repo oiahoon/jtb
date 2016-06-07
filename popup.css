@@ -1,0 +1,30 @@
+body {
+  font-size: 14px;
+}
+.container {
+  width: 250px;
+  padding: 1.2em 1.2em;
+}
+input, select {
+  margin: 0.4em 0;
+}
+input#jira_number{
+  margin-left: 5px;
+  width: 120px;
+  display: inline;
+}
+#go{
+  margin-left: 5px;
+}
+
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+}
