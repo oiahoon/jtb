@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open JIRA Ticket! Options</title>
+</head>
+  <body>
+    <div class="pure-g">
+      <div class="pure-u-2-3 banner">
+          <h1 class="banner-head">
+              Open JIRA Ticket! Options
+          </h1>
+      </div>
+      <div class="pure-u-2-3 main-container">
+        <div class="pure-form pure-form-aligned">
+          <div class="pure-control-group">
+            <label for="url">Jira link:</label>
+            <input type="url" class="pure-u-2-5" id="url" placeholder="Enter your Jira Url">
+            <lable class="example">Example: https://jirafnd.dev.activenetwork.com/browse/</lable>
+          </div>
+          <div class="pure-control-group">
+            <label for="project">Project:</label>
+            <input type="text" class="pure-u-1-5" id="project" placeholder="Enter your project">
+            <lable class="example">Example: DEB or DASHBOARD(only one)</lable>
+          </div>
+          <div class="pure-controls">
+            <button type="submit" id="save" class="pure-button pure-button-primary">Save</button>
+            <label id="status"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+  <link rel="stylesheet" href="pure-min.css">
+  <link rel="stylesheet" href="jira.css">
+  <script src="options.js"></script>
+</html>

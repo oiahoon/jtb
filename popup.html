@@ -1,22 +1,18 @@
 <!doctype html>
 <html>
   <head>
-    <title>JIRA plugin</title>
-    <script src="popup.js"></script>
     <link rel="stylesheet" href="pure-min.css">
     <link rel="stylesheet" href="popup.css">
+    <title>JIRA plugin</title>
   </head>
   <body>
-    <div class="container">
-      <form class="pure-form">
-          <select name="prefix" id="prefix">
-            <option value="DEB">DEB</option>
-            <option value="DASH">DASH</option>
-          </select>
-          <input type="text" id="jira_number" placeholder="JIRA ID" autofocus>
-          <button class="button-small pure-button button-success" id="go">Go</button>
+    <div class="container" id="container">
+      <form class="pure-form" name="jira">
+          <input type="text" id="jira_number" class="pure-u-12-24" name="jira_number" placeholder="JIRA ID" autofocus>
+          <input type="text" id="prefix" value="Project" readonly class="pure-u-5-24">
+          <button class="button-small pure-button button-success pure-u-5-24" id="go">Go</button>
       </form>
-
     </div>
   </body>
+  <script src="popup.js"></script>
 </html>

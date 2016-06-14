@@ -1,15 +1,22 @@
 body {
   font-size: 14px;
+  width: 267px;
 }
 .container {
-  width: 250px;
+  width: 100%;
   padding: 1.2em 1.2em;
+}
+.container > code {
+  margin: 1em, 1em;
 }
 input, select {
   margin: 0.4em 0;
 }
+#prefix {
+  margin-right: 5px;
+  float: left;
+}
 input#jira_number{
-  margin-left: 5px;
   width: 120px;
   display: inline;
 }
@@ -26,5 +33,5 @@ input#jira_number{
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .button-success {
-            background: rgb(28, 184, 65); /* this is a green */
+    background: rgb(28, 184, 65); /* this is a green */
 }

@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
   var goJiraButton = document.getElementById('go');
+  options = JSON.parse(localStorage.jira_options);
+  var jira_url = options.jira_url;
+  var prefix   = options.favoritePorject;
+  if(jira_url == undefined || jira_url.length < 1 || prefix == undefined ||  prefix.length < 1 ){
+      document.getElementById('container').innerHTML = '<code>fill the options before use :(</code>';
+      return false;
+    }
+  document.getElementById('prefix').value = prefix;
   goJiraButton.addEventListener('click', function() {
-    jira_number_input=document.getElementById('jira_number');
-    document.getElementById('jira_number').focus();
-    chrome.tabs.getSelected(null, function(tab) {
-      var jira_url="https://jirafnd.dev.activenetwork.com/browse/";
-      var prefix=document.getElementById('prefix').value;
-      var jira_number=jira_number_input.value;
-
-      window.open(jira_url+prefix+'-'+jira_number);
-    });
+    var jira_number=document.getElementById('jira_number').value;
+    window.open(jira_url+prefix+'-'+jira_number);
   }, false);
 }, false);
