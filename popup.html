@@ -1,18 +1,31 @@
 <!doctype html>
 <html>
   <head>
-    <link rel="stylesheet" href="pure-min.css">
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/popup.css">
     <title>JIRA plugin</title>
   </head>
   <body>
     <div class="container" id="container">
-      <form class="pure-form" name="jira">
-          <input type="text" id="jira_number" class="pure-u-12-24" name="jira_number" placeholder="JIRA ID" autofocus>
-          <input type="text" id="prefix" value="Project" readonly class="pure-u-5-24">
-          <button class="button-small pure-button button-success pure-u-5-24" id="go">Go</button>
+
+      <form name="jira" id='jira'>
+        <div class="form-group jira-form">
+          <div class="input-group">
+            <span class="input-group-addon" id="prefix">Project</span>
+            <input name="jira_number" id="jira_number" type="text" class="form-control" placeholder="JIRA ID" autofocus>
+            <span class="input-group-btn">
+              <button class="btn btn-small btn-success" type="submit" id="go">Go</button>
+            </span>
+          </div>
+        </div>
       </form>
+      <div class="alert alert-dismissible alert-success">
+        <strong>Hello!</strong> You can add you reminders from  <a href="#" class="alert-link">options!</a>.
+      </div>
+        <div class="event-box hidden list-group"></div>
+
     </div>
   </body>
-  <script src="popup.js"></script>
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+  <script type="text/javascript" src="js/popup.js"></script>
 </html>

@@ -1,39 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Open JIRA Ticket! Options</title>
 </head>
   <body>
-    <div class="pure-g">
-      <div class="pure-u-2-3 banner">
-          <h1 class="banner-head">
-              Open JIRA Ticket! Options
-          </h1>
+    <div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Open JIRA Ticket! Options</h3>
       </div>
-      <div class="pure-u-2-3 main-container">
-        <div class="pure-form pure-form-aligned">
-          <div class="pure-control-group">
-            <label for="url">Jira link:</label>
-            <input type="url" class="pure-u-2-5" id="url" placeholder="Enter your Jira Url">
-            <lable class="example">Example: https://jirafnd.dev.activenetwork.com/browse/</lable>
-          </div>
-          <div class="pure-control-group">
-            <label for="project">Project:</label>
-            <input type="text" class="pure-u-1-5" id="project" placeholder="Enter your project">
-            <lable class="example">Example: DEB or DASHBOARD(only one)</lable>
-          </div>
-          <div class="pure-controls">
-            <button type="submit" id="save" class="pure-button pure-button-primary">Save</button>
-            <label id="status"></label>
-          </div>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 well">
+          <form class="form-horizontal jira_fake">
+            <fieldset>
+              <div class="form-group">
+                <label for="url" class="col-sm-2 control-label">Jira link:</label>
+                <div class="col-sm-10">
+                  <input type="url" class="form-control" id="url" placeholder="Enter your Jira Url">
+                  <lable class="example">e.g. <span class="label label-default">https://jirafnd.dev.activenetwork.com/browse/</span>(<code>include the end '/'</code>)</lable>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="project" class="col-sm-2 control-label">Project:</label>
+                <div class="col-sm-10">
+                  <input type="project" class="form-control" id="project" placeholder="Enter your project">
+                  <lable class="example">e.g. <span class="label label-default">VEB</span> or <span class="label label-default">DASHBOARD</span></lable>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Reminders</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="event-name" placeholder="Jira Number">
+                </div>
+                <div class="col-sm-3">
+                  <input type="date" class="form-control" id="event-date">
+                </div>
+                <button class="btn btn-default" type="button" id="add-event">Add</button>
+
+                <div class="well event-box col-md-9 col-md-offset-2">
+                  <ul class="nav nav-pills row">
+                  </ul>
+                </div>
+
+              </div>
+
+              <button id="save" class="btn btn-success btn-lg btn-block">Save</button>
+              <label id="save-status"></label>
+            </fieldset>
+
+          </form>
+
         </div>
-      </div>
-    </div>
+
 
 
   </body>
-  <link rel="stylesheet" href="pure-min.css">
-  <link rel="stylesheet" href="jira.css">
-  <script src="options.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/jira.css">
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+  <script src="js/options.js"></script>
 </html>
