@@ -1,18 +1,16 @@
 {
   "manifest_version": 2,
 
-  "name": "Open JIRA Ticket!",
-  "description": "Enter the jira ticket number to open it.\r\nFeature: 1. auto focus the jira number input; 2. change the icon; 3. Add option page;",
+  "name": "Go your JIRAs!",
+  "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚",
   "version": "2.0.0",
 
   "browser_action": {
-   "default_icon": "icon.png",
-   "default_popup": "popup.html"
+    "default_title": "Go your JIRAs!",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
   },
-  // "options_ui": {
-  //   "option_page": "options.html",
-  //   "chrome_style": false
-  // },
+
   "options_page": "options.html",
 
   "permissions": [
