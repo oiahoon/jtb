@@ -1,4 +1,4 @@
-var storage = chrome.storage.local;
+
 var event_item = $('<li class="col-md-5" data-id=""><a><span class="badge"></span><button type="button" class="close jira_fake"><span class="delete_reminder">&times;</span></button></a></li>');
 
 function save_options() {
@@ -76,34 +76,6 @@ function render_reminders(reminder_events){
     event_html.attr('data-id', reminder_events[i].id);
     event_html.find('.delete_reminder').on('click', delete_handler);
     $(".event-box ul").append(event_html);
-  }
-}
-function arr_insert( arr, item ){
-  if(!(arr.constructor === Array)){arr = Array();}
-  if(typeof item == 'object'){
-    item.id = arr.length + 1;
-    item_to_insert = item;
-  }
-  else{
-    item_to_insert = {id: (arr.length + 1), item}
-  }
-  arr.push(item);
-  return arr;
-}
-function arr_delete( arr, id ){
-  if(arr.constructor === Array && Number.isInteger(id) && id > 0 ){
-    for (var i = arr.length - 1; i >= 0; i--) {
-      if(!(Number.isInteger(arr[i].id) && arr[i].id > 0) || arr[i].id == id){
-        arr.splice(i, 1);
-      }
-    }
-    for (var i = arr.length - 1; i >= 0; i--) {
-      arr[i].id = i + 1;
-    }
-    return arr;
-  }
-  else{
-    return [];
   }
 }
 

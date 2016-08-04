@@ -3,7 +3,7 @@
 
   "name": "Go your JIRAs!",
   "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚",
-  "version": "2.0.0",
+  "version": "2.0.1",
 
   "browser_action": {
     "default_title": "Go your JIRAs!",

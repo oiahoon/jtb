@@ -54,5 +54,13 @@ body {
   background-color: #d62c1a;
 }
 .badge-success {
-    background-color: rgb(24, 188, 156);
+  background-color: rgb(24, 188, 156);
+}
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  font-weight: 700;
+  display: none;
 }
