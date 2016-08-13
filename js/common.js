@@ -1,105 +1,23 @@
 var storage = chrome.storage.local;
-function arr_delete( arr, id ){
-  if(arr.constructor === Array){
-    if (Number.isInteger(id) && id > 0 ) {
-      for (var i = arr.length - 1; i >= 0; i--) {
-        if(!(Number.isInteger(arr[i].id) && arr[i].id > 0) || arr[i].id == id){
-          arr.splice(i, 1);
-        }
-      }
-      for (var i = arr.length - 1; i >= 0; i--) {
-        arr[i].id = i + 1;
-      }
-    }
-    return arr;
-  }
-  else{
-    return [];
-  }
+var spin_opts = {
+  lines: 7 // The number of lines to draw
+, length: 0 // The length of each line
+, width: 14 // The line thickness
+, radius: 0 // The radius of the inner circle
+, scale: 1 // Scales overall size of the spinner
+, corners: 0.3 // Corner roundness (0..1)
+, color: '#000' // #rgb or #rrggbb or array of colors
+, opacity: 0.1 // Opacity of the lines
+, rotate: 48 // The rotation offset
+, direction: 1 // 1: clockwise, -1: counterclockwise
+, speed: 0.9 // Rounds per second
+, trail: 50 // Afterglow percentage
+, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+, zIndex: 2e9 // The z-index (defaults to 2000000000)
+, className: 'spinner' // The CSS class to assign to the spinner
+, top: '68%' // Top position relative to parent
+, left: '50%' // Left position relative to parent
+, shadow: false // Whether to render a shadow
+, hwaccel: false // Whether to use hardware acceleration
+, position: 'absolute' // Element positioning
 }
-
-function arr_insert( arr, item ){
-  if(!(arr.constructor === Array)){arr = Array();}
-  if(typeof item == 'object'){
-    item.id = arr.length + 1;
-    item_to_insert = item;
-  }
-  else{
-    item_to_insert = {id: (arr.length + 1), item}
-  }
-  arr.push(item);
-  return arr;
-}
-
-
-
-function restore_reminders(){
-  storage.get({reminder_events: []}, function(items) {
-    var reminder_events = items.reminder_events;
-    // console.log(reminder_events);
-    // console.log(reminder_events.length);
-    if (reminder_events.length > 0) {
-      $(".alert").remove();
-      $(".event-box").removeClass('hidden');
-      render_reminders(reminder_events);
-      console.log(reminder_events);
-    }
-  });
-}
-
-function remove_reminder(event_id){
-  storage.get({reminder_events: []}, function(items) {
-    var reminder_events = items.reminder_events;
-    reminder_events = arr_delete(reminder_events, event_id);
-    // console.log("arr_delete:");
-    // console.log(reminder_events);
-    storage.set({reminder_events: reminder_events}, function() {
-      render_reminders(reminder_events);
-    });
-  });
-}
-
-function render_reminders(reminder_events){
-  $(".event-box").html('<h3>Reminders</h3>');
-  for (var i = 0; i < reminder_events.length; i++) {
-    var time_string = reminder_events[i].event_date.slice(0,10);
-    var event_html = $('<a href="#" class="list-group-item" data-index='+reminder_events[i].id+'><span class="badge">'+time_string+'</span><p data-jira-number="'+reminder_events[i].event_name+'">'+reminder_events[i].event_name+'</p></a>')
-    event_html.append(close_button);
-    var time_left = get_time_remaining(reminder_events[i].event_date);
-    if(time_left.total > 0) {
-      process_bar = $('<div class="progress progress-striped active"><div class="progress-bar" style="width: 15%"></div></div>')
-      if(time_left.days < 1){
-        if(time_left.hours < 6) {
-          event_html.find("span").attr('class', 'badge badge-danger');
-          process_bar.find(".progress-bar").addClass("progress-bar-danger").attr('style', 'width: 95%');
-        }
-        else{
-          event_html.find("span").attr('class', 'badge badge-warning');
-          process_bar.find(".progress-bar").addClass("progress-bar-warning").attr('style', 'width: 75%');
-        }
-      }
-      else{
-        event_html.find("span").attr('class', 'badge badge-success');
-        process_bar.find(".progress-bar").addClass('progress-bar-success');
-      }
-      event_html.append(process_bar);
-    }
-    else{
-      event_html.find(".badge").attr('class', 'badge badge-default').html('Over due ;(')
-      event_html.append('<div class="progress"><div class="progress-bar" style="width: 100%"></div></div>')
-    }
-    event_html.hover(function() {
-    var clsbtn = $(this).find(".close-button");
-      clsbtn.show();
-      clsbtn.click(function(event) {
-        var event_id = $(this).parent('a').attr('data-index');
-        remove_reminder(parseInt(event_id));
-        // return false;
-      });
-    }, function() {
-      $(this).find('.close-button').hide();
-    });
-    $(".event-box").append(event_html);
-  }
-}
-

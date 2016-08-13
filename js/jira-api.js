@@ -23,7 +23,7 @@ class JTB {
     var url = this._jira_url + '/rest/auth/1/session';
     client.open("POST", url, false);
     client.setRequestHeader("Content-Type", "application/json");
-    console.log("===============================");
+    // console.log("===============================");
     var post_data = JSON.stringify({"username": this._user, "password": this._password});
     // console.log(post_data);
     client.send(post_data);

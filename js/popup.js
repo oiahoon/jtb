@@ -3,7 +3,7 @@ var username; var password; var jql;
 var close_button = '<div id="close-button" class="btn btn-primary btn-xs close-button">&times;</div>';
 
 storage.get('jira_url', function(items){
-  console.log(items);
+  // console.log(items);
   jira_url = items.jira_url;
 });
 storage.get('project', function(items){
@@ -22,7 +22,7 @@ storage.get('jql', function(items){
 
 function render_tickets(){
   jira_tool_box = new JTB(jira_url, username, password);
-  jira_tool_box.auth();
+  // jira_tool_box.auth();
   result = jira_tool_box.query({
     'jql': jql,
     "startAt": 0,
@@ -63,7 +63,7 @@ function create_ticket(ticket){
     var dev_duedate = 'not set';
   }
   ticket_html.prepend('<span class="label duedate label-default">Dev Due: ' + dev_duedate + '</span>');
-  console.log(ticket_html);
+  // console.log(ticket_html);
   return ticket_html;
 }
 
@@ -133,12 +133,21 @@ $(function() {
       '</div>');
     return false;
   }
-  if (jql == undefined ||  jql.length < 1 ) {
-    $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
-  }
   else{
-    render_tickets();
+    var spinner = new Spinner(spin_opts).spin();
+    $.when(
+      $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el),
+      setTimeout(function(){if (jql == undefined ||  jql.length < 1 ) {
+        $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
+      }
+      else{
+        render_tickets();
+      }
+      },1333)
+    ).done();
   }
+  // $.when().then(function( x ) {
+  // });
   $(".option-page-link").click(function(event) {
     if (chrome.runtime.openOptionsPage) {
       // New way to open options pages, if supported (Chrome 42+).
