@@ -1,5 +1,5 @@
-var jira_url;
-var prefix;
+var jira_url; var prefix;
+var username; var password; var jql;
 var close_button = '<div id="close-button" class="btn btn-primary btn-xs close-button">&times;</div>';
 
 storage.get('jira_url', function(items){
@@ -7,82 +7,105 @@ storage.get('jira_url', function(items){
   jira_url = items.jira_url;
 });
 storage.get('project', function(items){
-  console.log(items);
+  // console.log(items);
   prefix = items.project;
 });
+storage.get('username', function(items){
+  username = items.username;
+});
+storage.get('password', function(items){
+  password = items.password;
+});
+storage.get('jql', function(items){
+  jql = items.jql;
+});
 
-restore_reminders();
-
-function restore_reminders(){
-  storage.get({reminder_events: []}, function(items) {
-    var reminder_events = items.reminder_events;
-    // console.log(reminder_events);
-    // console.log(reminder_events.length);
-    if (reminder_events.length > 0) {
-      $(".alert").remove();
-      $(".event-box").removeClass('hidden');
-      render_reminders(reminder_events);
-      console.log(reminder_events);
-    }
+function render_tickets(){
+  jira_tool_box = new JTB(jira_url, username, password);
+  jira_tool_box.auth();
+  result = jira_tool_box.query({
+    'jql': jql,
+    "startAt": 0,
+    "maxResults": 50,
+    "fields":["id","key", "duedate", "summary", "progress","timespent", "status", "customfield_12551", "assignee"]
   });
-}
-
-function remove_reminder(event_id){
-  storage.get({reminder_events: []}, function(items) {
-    var reminder_events = items.reminder_events;
-    reminder_events = arr_delete(reminder_events, event_id);
-    // console.log("arr_delete:");
-    // console.log(reminder_events);
-    storage.set({reminder_events: reminder_events}, function() {
-      render_reminders(reminder_events);
-    });
-  });
-}
-
-function render_reminders(reminder_events){
-  $(".event-box").html('<h3>Reminders</h3>');
-  for (var i = 0; i < reminder_events.length; i++) {
-    var time_string = reminder_events[i].event_date.slice(0,10);
-    var event_html = $('<a href="#" class="list-group-item" data-index='+reminder_events[i].id+'><span class="badge">'+time_string+'</span><p data-jira-number="'+reminder_events[i].event_name+'">'+reminder_events[i].event_name+'</p></a>')
-    event_html.append(close_button);
-    var time_left = get_time_remaining(reminder_events[i].event_date);
-    if(time_left.total > 0) {
-      process_bar = $('<div class="progress progress-striped active"><div class="progress-bar" style="width: 15%"></div></div>')
-      if(time_left.days < 1){
-        if(time_left.hours < 6) {
-          event_html.find("span").attr('class', 'badge badge-danger');
-          process_bar.find(".progress-bar").addClass("progress-bar-danger").attr('style', 'width: 95%');
-        }
-        else{
-          event_html.find("span").attr('class', 'badge badge-warning');
-          process_bar.find(".progress-bar").addClass("progress-bar-warning").attr('style', 'width: 75%');
-        }
-      }
-      else{
-        event_html.find("span").attr('class', 'badge badge-success');
-        process_bar.find(".progress-bar").addClass('progress-bar-success');
-      }
-      event_html.append(process_bar);
-    }
-    else{
-      event_html.find(".badge").attr('class', 'badge badge-default').html('Over due ;(')
-      event_html.append('<div class="progress"><div class="progress-bar" style="width: 100%"></div></div>')
-    }
-    event_html.hover(function() {
-    var clsbtn = $(this).find(".close-button");
-      clsbtn.show();
-      clsbtn.click(function(event) {
-        var event_id = $(this).parent('a').attr('data-index');
-        remove_reminder(parseInt(event_id));
-        // return false;
-      });
-    }, function() {
-      $(this).find('.close-button').hide();
-    });
-    $(".event-box").append(event_html);
+  if (result.issues.length > 0) {
+    $(".alert").remove();
+    $(".myTabContent").removeClass('hidden');
+    $("#jira-list").html('<h3>Tickets</h3>');
+    append_tickets(result.issues);
   }
 }
 
+function append_tickets(tickets){
+  for (var i = 0; i < tickets.length; i++) {
+    $("#jira-list").append(create_ticket(tickets[i]));
+  }
+}
+
+function create_ticket(ticket){
+  var ticket_html = $(document.createElement('li'))
+  .attr({
+    "data-id": ticket.id,
+    "data-key": ticket.key
+  })
+  .addClass('list-group-item jira-ticket');
+  ticket_html.append('<h5 data-jira-key="' + ticket.key + '"><a target="_blank" href="'+jira_url+'/browse/'+ticket.key+'"><b>[' + ticket.key + ']</b>' +ticket.fields.summary + '</a></h5>');
+  ticket_html.append('<p class="assignee text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><em>'
+                      + ticket.fields.assignee.displayName +
+                      '</em>&nbsp;|&nbsp;<span class="glyphicon glyphicon-time" aria-hidden="true"></span><em>'
+                      + time_convert(ticket.fields.timespent)+'</em></p>');
+  ticket_html.prepend(status_label(ticket.fields.status));
+  if (ticket.fields.customfield_12551) {
+    var dev_duedate = ticket.fields.customfield_12551;
+  }
+  else{
+    var dev_duedate = 'not set';
+  }
+  ticket_html.prepend('<span class="label duedate label-default">Dev Due: ' + dev_duedate + '</span>');
+  console.log(ticket_html);
+  return ticket_html;
+}
+
+function status_label(status) {
+  var cls = 'label-info';
+  switch (status.name) {
+    case 'Open':
+    case 'In Progress':
+      cls = 'label-info';
+      break;
+    case 'Coding':
+      cls = 'label-success';
+      break;
+    case 'Test':
+      cls = 'label-warning';
+      break;
+    case 'Closed':
+      cls = 'label-default';
+      break;
+    case 'Review':
+      cls = 'label-primary';
+      break;
+  }
+  var status_html = $('<span class="label status">'+status.name+'</span>').addClass(cls);
+  return status_html;
+}
+function time_convert(seconds) {
+  var days = 0;
+  var hours = Math.floor( seconds / (60*60) );
+  if(hours > 8){
+    days = Math.floor(hours/8);
+    hours_left = hours - days*8;
+    result = days + 'd' + hours_left + 'h';
+  }
+  else if(hours == 8){
+    result = '1d';
+  }
+  else{
+    result = hours + 'h';
+  }
+  return result;
+}
 function get_time_remaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor( (t/1000) % 60 );
@@ -98,10 +121,24 @@ function get_time_remaining(endtime){
   };
 }
 
-function open_jira_number(jira_number){
-  window.open(jira_url+prefix+'-'+jira_number);
+function open_jira_ticket(jira_key){
+  window.open(jira_url+'/browse/' + jira_key);
 }
+
 $(function() {
+  if(jira_url == undefined || jira_url.length < 1
+      || prefix == undefined ||  prefix.length < 1){
+    $('.container').html('<div class="alert alert-dismissible alert-success">'+
+        '<strong>Hello!</strong> You can configure from <a href="#" class="alert-link option-page-link">options!</a>.'+
+      '</div>');
+    return false;
+  }
+  if (jql == undefined ||  jql.length < 1 ) {
+    $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
+  }
+  else{
+    render_tickets();
+  }
   $(".option-page-link").click(function(event) {
     if (chrome.runtime.openOptionsPage) {
       // New way to open options pages, if supported (Chrome 42+).
@@ -112,18 +149,9 @@ $(function() {
     }
   });
   $('#prefix').html(prefix + ' - ');
-  if(jira_url == undefined || jira_url.length < 1 || prefix == undefined ||  prefix.length < 1 ){
-    $('.container').html("<code>fill the options before use :(</code>");
-    return false;
-  }
   $('form#jira').submit(function(event) {
     var jira_number = $("#jira_number").val();
-    open_jira_number(jira_number);
-    return false;
-  });
-  $(".list-group-item p").click(function(event) {
-    var jira_number = $(this).attr("data-jira-number");
-    open_jira_number(jira_number);
+    open_jira_ticket(prefix+'-'+jira_number);
     return false;
   });
 

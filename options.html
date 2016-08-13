@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open JIRA Ticket! Options</title>
+  <title>JIRA Tool Box! Options</title>
 </head>
   <body>
     <div class="container">
       <div class="header clearfix">
-        <h3 class="text-muted">Open JIRA Ticket! Options</h3>
+        <h3 class="text-muted">JIRA Tool Box! Options
+        <span class="badge">3.0.0</span></h3>
       </div>
 
       <div class="row">
@@ -16,10 +17,10 @@
           <form class="form-horizontal jira_fake">
             <fieldset>
               <div class="form-group">
-                <label for="url" class="col-sm-2 control-label">Jira link:</label>
+                <label for="jira_url" class="col-sm-2 control-label">Jira link:</label>
                 <div class="col-sm-10">
-                  <input type="url" class="form-control" id="url" placeholder="Enter your Jira Url">
-                  <lable class="example">e.g. <span class="label label-default">https://jirafnd.dev.activenetwork.com/browse/</span>(<code>include the end '/'</code>)</lable>
+                  <input type="url" class="form-control" id="jira_url" placeholder="Enter your Jira Url">
+                  <lable class="example">e.g. <span class="label label-default">https://jirafnd.dev.activenetwork.com</span>(<code>take out the end '/'</code>)</lable>
                 </div>
               </div>
               <div class="form-group">
@@ -30,20 +31,25 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">Reminders</label>
+                <label class="col-sm-2 control-label">Jira Account</label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="event-name" placeholder="Jira Number">
+                  <input type="text" class="form-control" id="username" placeholder="Username">
                 </div>
                 <div class="col-sm-3">
-                  <input type="date" class="form-control" id="event-date">
+                  <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
-                <button class="btn btn-default" type="button" id="add-event">Add</button>
+                <span class="help-block">Your accout info only be stored in the local.</span>
+              </div>
 
-                <div class="well event-box col-md-9 col-md-offset-2">
-                  <ul class="nav nav-pills row">
-                  </ul>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Jira Jql</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="3" id="jql" name="jql"></textarea>
+                    <span class="help-block">Enter the jql you set in jira.<br/>
+                    e.g. <code>filert=3213</code></br>
+                    e.g. <code>project = XXX AND issuetype in standardIssueTypes() AND status in (Open, 'In Progress', Test, Review, Design, Coding, 'Review Queue', 'Code Review') AND Developer in (currentUser()) ORDER BY created DESC</code>
+                    </span>
                 </div>
-
               </div>
 
               <button id="save" class="btn btn-success btn-lg btn-block">Save</button>
@@ -62,4 +68,5 @@
   <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
   <script src="js/common.js"></script>
   <script src="js/options.js"></script>
+  <script src="js/jira-api.js"></script>
 </html>

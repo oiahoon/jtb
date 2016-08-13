@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
 
-  "name": "Go your JIRAs!",
+  "name": "JIRA Tool Box!",
   "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚",
-  "version": "2.0.1",
+  "version": "3.0.0",
 
   "browser_action": {
-    "default_title": "Go your JIRAs!",
+    "default_title": "JIRA tool box!",
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
@@ -15,6 +15,10 @@
 
   "permissions": [
      "activeTab",
-     "storage"
+     "storage",
+     "http://*/*",
+     "https://*/*",
+     "https://www.google.com/*",
+     "http://www.google.com/*"
    ]
 }

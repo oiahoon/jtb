@@ -11,6 +11,27 @@ body {
 .progress {
   margin-bottom: 0;
 }
+.list-group-item>.status {
+  position: relative;
+  margin-top: -11px;
+  border-top-left-radius: 0em;
+  border-bottom-left-radius: 0em;
+  float: left;
+}
+.list-group-item>.duedate {
+  position: relative;
+  margin-top: -11px;
+  margin-left: -15px;
+  border-top-right-radius: 0em;
+  border-bottom-right-radius: 0em;
+  float: left;
+}
+.jira-ticket > h5 > a > b {
+  padding: 0 0.2em;
+}
+.assignee > em{
+  padding: 0 0.4em;
+}
 .badge-default {
   background-color: #95a5a6;
 }
