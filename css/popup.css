@@ -18,7 +18,7 @@ body {
   border-bottom-left-radius: 0em;
   float: left;
 }
-.list-group-item>.duedate {
+.list-group-item>.fix-version {
   position: relative;
   margin-top: -11px;
   margin-left: -15px;
@@ -29,8 +29,17 @@ body {
 .jira-ticket > h5 > a > b {
   padding: 0 0.2em;
 }
+p.assignee {
+  margin-bottom: 0.1em;
+}
 .assignee > em{
   padding: 0 0.4em;
+}
+.issuetype {
+  position: relative;
+  float: right;
+  margin-right: -15px;
+  margin-top: -13px;
 }
 .badge-default {
   background-color: #95a5a6;
@@ -77,11 +86,24 @@ body {
 .badge-success {
   background-color: rgb(24, 188, 156);
 }
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 100;
-  font-weight: 700;
-  display: none;
+.sticky{
+  position: relative;
+  width: 0;
+  height: 0;
+  float: right;
+  margin-right: -15px;
+  margin-top: -75px;
+  border-bottom: 100px solid #cecece;
+  border-left: 100px solid transparent;
+}
+.sticky > span {
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    display: inline-block;
+    position: absolute;
+    top: 57px;
+    right: 30px;
+    width: 15px;
+    font-size: 0.8em;
+    color: #fff;
 }

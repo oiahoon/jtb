@@ -27,7 +27,10 @@ function render_tickets(){
     'jql': jql,
     "startAt": 0,
     "maxResults": 50,
-    "fields":["id","key", "duedate", "summary", "progress","timespent", "status", "customfield_12551", "assignee"]
+    "fields":["id","key", "duedate", "summary",
+              "progress","timespent", "status", "customfield_12551",
+              // "subtasks",
+              "assignee", "fixVersions", "issuetype"]
   });
   if (result.issues.length > 0) {
     $(".alert").remove();
@@ -50,23 +53,40 @@ function create_ticket(ticket){
     "data-key": ticket.key
   })
   .addClass('list-group-item jira-ticket');
+  ticket_html.append('<div class="issuetype" title="'+ticket.fields.issuetype.name+'">'+
+                      '<img src="'+ticket.fields.issuetype.iconUrl+'"></div>');
   ticket_html.append('<h5 data-jira-key="' + ticket.key + '"><a target="_blank" href="'+jira_url+'/browse/'+ticket.key+'"><b>[' + ticket.key + ']</b>' +ticket.fields.summary + '</a></h5>');
-  ticket_html.append('<p class="assignee text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><em>'
+  ticket_html.append('<p class="assignee text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true" title="Assignee"></span><em>'
                       + ticket.fields.assignee.displayName +
-                      '</em>&nbsp;|&nbsp;<span class="glyphicon glyphicon-time" aria-hidden="true"></span><em>'
-                      + time_convert(ticket.fields.timespent)+'</em></p>');
+                      '</em>' + duedate_span(ticket.fields.customfield_12551) + '</p>');
   ticket_html.prepend(status_label(ticket.fields.status));
-  if (ticket.fields.customfield_12551) {
-    var dev_duedate = ticket.fields.customfield_12551;
-  }
-  else{
-    var dev_duedate = 'not set';
-  }
-  ticket_html.prepend('<span class="label duedate label-default">Dev Due: ' + dev_duedate + '</span>');
+  ticket_html.prepend(sprint_span(ticket.fields.fixVersions));
   // console.log(ticket_html);
   return ticket_html;
 }
 
+function issuetype_icon(issuetype){
+  var result = '';
+  if(issuetype) {
+    result = issuetype.iconUrl;
+  }
+}
+
+function sprint_span(sprint) {
+  var result = '<span class="label fix-version label-default">Back log</span>';
+  if (sprint && sprint.length > 0) {
+    result = '<span class="label fix-version label-default">' + sprint[0].name + '</span>';
+  }
+  return result;
+}
+function duedate_span(duedate) {
+  var result = '';
+  if (duedate) {
+    result = '&nbsp;|&nbsp;<span class="glyphicon glyphicon-time" aria-hidden="true" title="Dev Duedate"></span><em>'
+              + duedate +'</em>';
+  }
+  return result;
+}
 function status_label(status) {
   var cls = 'label-info';
   switch (status.name) {
@@ -163,5 +183,5 @@ $(function() {
     open_jira_ticket(prefix+'-'+jira_number);
     return false;
   });
-
+  // $('[data-toggle="tooltip"]').tooltip();
 });
