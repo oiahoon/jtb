@@ -142,7 +142,8 @@ function get_time_remaining(endtime){
 }
 
 function open_jira_ticket(jira_key){
-  window.open(jira_url+'/browse/' + jira_key);
+  chrome.tabs.create({url: jira_url+'/browse/' + jira_key, active: false});
+  $("input#jira_number").val('');
 }
 
 $(function() {
