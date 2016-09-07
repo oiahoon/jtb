@@ -55,7 +55,7 @@ function create_ticket(ticket){
   .addClass('list-group-item jira-ticket');
   ticket_html.append('<div class="issuetype" title="'+ticket.fields.issuetype.name+'">'+
                       '<img src="'+ticket.fields.issuetype.iconUrl+'"></div>');
-  ticket_html.append('<h5 data-jira-key="' + ticket.key + '"><a target="_blank" href="'+jira_url+'/browse/'+ticket.key+'"><b>[' + ticket.key + ']</b>' +ticket.fields.summary + '</a></h5>');
+  ticket_html.append('<h5 data-jira-key="' + ticket.key + '"><a href="'+jira_url+'/browse/'+ticket.key+'"><b>[' + ticket.key + ']</b>' +ticket.fields.summary + '</a></h5>');
   ticket_html.append('<p class="assignee text-muted"><span class="glyphicon glyphicon-user" aria-hidden="true" title="Assignee"></span><em>'
                       + ticket.fields.assignee.displayName +
                       '</em>' + duedate_span(ticket.fields.customfield_12551) + '</p>');
@@ -151,7 +151,6 @@ $(function() {
     $('.container').html('<div class="alert alert-dismissible alert-success">'+
         '<strong>Hello!</strong> You can configure from <a href="#" class="alert-link option-page-link">options!</a>.'+
       '</div>');
-    return false;
   }
   else{
     var spinner = new Spinner(spin_opts).spin();
@@ -168,7 +167,7 @@ $(function() {
   }
   // $.when().then(function( x ) {
   // });
-  $(".option-page-link").click(function(event) {
+  $("div.container").on('click', 'a.option-page-link', function(event) {
     if (chrome.runtime.openOptionsPage) {
       // New way to open options pages, if supported (Chrome 42+).
       chrome.runtime.openOptionsPage();
@@ -176,6 +175,10 @@ $(function() {
       // Reasonable fallback.
       window.open(chrome.runtime.getURL('options.html'));
     }
+  });
+  // open new tab on background, without losing focus on popup
+  $("ul.list-group").on('click', 'a', function(e){
+    chrome.tabs.create({url:this.href, active: false});
   });
   $('#prefix').html(prefix + ' - ');
   $('form#jira').submit(function(event) {
