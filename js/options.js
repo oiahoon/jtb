@@ -65,6 +65,5 @@ $(function () {
     event.preventDefault();
     // return false;
   });
-
-
+  $("span.version").html(manifest.version);
 });

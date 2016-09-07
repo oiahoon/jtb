@@ -1,4 +1,4 @@
-var storage = chrome.storage.local;
+var storage = chrome.storage.sync;
 var spin_opts = {
   lines: 7 // The number of lines to draw
 , length: 0 // The length of each line
@@ -20,4 +20,5 @@ var spin_opts = {
 , shadow: false // Whether to render a shadow
 , hwaccel: false // Whether to use hardware acceleration
 , position: 'absolute' // Element positioning
-}
+};
+var manifest = chrome.runtime.getManifest();
