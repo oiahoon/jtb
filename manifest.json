@@ -3,7 +3,7 @@
 
   "name": "JIRA Tool Box!",
   "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚",
-  "version": "3.1.0",
+  "version": "3.1.1",
 
   "browser_action": {
     "default_title": "JIRA tool box!",
@@ -14,11 +14,11 @@
   "options_page": "options.html",
 
   "permissions": [
-     "activeTab",
-     "storage",
-     "http://*/*",
-     "https://*/*",
-     "https://www.google.com/*",
-     "http://www.google.com/*"
+    "activeTab",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "https://www.google.com/*",
+    "http://www.google.com/*"
    ]
 }

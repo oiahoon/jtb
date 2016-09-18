@@ -1,14 +1,26 @@
 /**
  * JTB means jira tool box
  * use Cookie-based Authentication
+ *
+ *
+ * USAGE
  */
+// jira_tool_box = new JTB('https://jirafnd.dev.activenetwork.com', 'username', 'password');
+// jira_tool_box.auth();
+// result = jira_tool_box.query({
+//   'jql':'filter=35023',
+//   "startAt": 0,
+//   "maxResults": 50,
+//   "fields":["id","key", "duedate","progress","timespent", "status", "customfield_12551", "assignee"]
+// });
+//
 class JTB {
   constructor(jira_url, username, password) {
-    this._jira_url = jira_url;
-    this._user = username;
-    this._password = password;
-    this._client = undefined;
-    this._cookie = undefined;
+    this._jira_url   = jira_url;
+    this._user       = username;
+    this._password   = password;
+    this._client     = undefined;
+    this._cookie     = undefined;
   }
 
   client() {
@@ -52,15 +64,3 @@ class JTB {
     return resp;
   }
 }
-
-/**
- * USAGE
- */
-// jira_tool_box = new JTB('https://jirafnd.dev.activenetwork.com', 'jhuang', 'hyY19870511');
-// jira_tool_box.auth();
-// result = jira_tool_box.query({
-//   'jql':'filter=35023',
-//   "startAt": 0,
-//   "maxResults": 50,
-//   "fields":["id","key", "duedate","progress","timespent", "status", "customfield_12551", "assignee"]
-// });

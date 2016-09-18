@@ -1,6 +1,5 @@
 var jira_url; var prefix;
 var username; var password; var jql;
-var close_button = '<div id="close-button" class="btn btn-primary btn-xs close-button">&times;</div>';
 
 storage.get('jira_url', function(items){
   // console.log(items);
@@ -20,10 +19,9 @@ storage.get('jql', function(items){
   jql = items.jql;
 });
 
-function render_tickets(){
-  jira_tool_box = new JTB(jira_url, username, password);
-  // jira_tool_box.auth();
-  result = jira_tool_box.query({
+
+function fetch_data_and_render(){
+  var queryJson = {
     'jql': jql,
     "startAt": 0,
     "maxResults": 50,
@@ -31,12 +29,48 @@ function render_tickets(){
               "progress","timespent", "status", "customfield_12551",
               // "subtasks",
               "assignee", "fixVersions", "issuetype"]
+  }
+  var lstorage = chrome.storage.local;
+  var md5_key = md5(JSON.stringify(queryJson));
+  var cache_data = undefined;
+  // console.log('======== query key : '+md5_key);
+  lstorage.get(md5_key, function(items){
+    if(items[md5_key] && items[md5_key]._expiretime && items[md5_key]._expiretime >= (new Date().getTime())){
+        console.log('cache data exist');
+        cache_data = items[md5_key]._data;
+    }
+    else{
+      console.log('cache data is undefined or expired');
+      jira_tool_box = new JTB(jira_url, username, password);
+      cache_data = jira_tool_box.query(queryJson);
+      // console.log(cache_data);
+      var data_to_cache = {};
+      data_to_cache[md5_key] = {_data: cache_data, _expiretime: new Date().getTime() + expiretime}
+      console.log('save data to cache');
+      lstorage.set(data_to_cache);
+    }
+    render_tickets(cache_data);
   });
-  if (result.issues.length > 0) {
+}
+
+
+function render_tickets(data){
+  // jira_tool_box = new JTB(jira_url, username, password);
+  // jira_tool_box.auth();
+  // result = jira_tool_box.query({
+  //   'jql': jql,
+  //   "startAt": 0,
+  //   "maxResults": 50,
+  //   "fields":["id","key", "duedate", "summary",
+  //             "progress","timespent", "status", "customfield_12551",
+  //             // "subtasks",
+  //             "assignee", "fixVersions", "issuetype"]
+  // });
+  if (data.issues.length > 0) {
     $(".alert").remove();
     $(".myTabContent").removeClass('hidden');
     $("#jira-list").html('<h3>Tickets</h3>');
-    append_tickets(result.issues);
+    append_tickets(data.issues);
   }
 }
 
@@ -147,6 +181,7 @@ function open_jira_ticket(jira_key){
 }
 
 $(function() {
+  console.profile('性能分析器');
   if(jira_url == undefined || jira_url.length < 1
       || prefix == undefined ||  prefix.length < 1){
     $('.container').html('<div class="alert alert-dismissible alert-success">'+
@@ -161,7 +196,7 @@ $(function() {
         $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
       }
       else{
-        render_tickets();
+        fetch_data_and_render();
       }
       },1333)
     ).done();
@@ -188,4 +223,5 @@ $(function() {
     return false;
   });
   // $('[data-toggle="tooltip"]').tooltip();
+  console.profileEnd();
 });

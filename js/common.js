@@ -3,14 +3,14 @@ var spin_opts = {
   lines: 7 // The number of lines to draw
 , length: 0 // The length of each line
 , width: 14 // The line thickness
-, radius: 0 // The radius of the inner circle
+, radius: 9 // The radius of the inner circle
 , scale: 1 // Scales overall size of the spinner
-, corners: 0.3 // Corner roundness (0..1)
+, corners: 1 // Corner roundness (0..1)
 , color: '#000' // #rgb or #rrggbb or array of colors
-, opacity: 0.1 // Opacity of the lines
-, rotate: 48 // The rotation offset
+, opacity: 0 // Opacity of the lines
+, rotate: 0 // The rotation offset
 , direction: 1 // 1: clockwise, -1: counterclockwise
-, speed: 0.9 // Rounds per second
+, speed: 1.9 // Rounds per second
 , trail: 50 // Afterglow percentage
 , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
 , zIndex: 2e9 // The z-index (defaults to 2000000000)
@@ -22,3 +22,4 @@ var spin_opts = {
 , position: 'absolute' // Element positioning
 };
 var manifest = chrome.runtime.getManifest();
+var expiretime = 60*60*5; // expired in 5 minutes
