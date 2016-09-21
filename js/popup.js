@@ -19,7 +19,8 @@ storage.get('jql', function(items){
   jql = items.jql;
 });
 
-
+// customfield_12551 => dev duedate
+// customfield_11150 => sprint
 function fetch_data_and_render(){
   var queryJson = {
     'jql': jql,
@@ -27,8 +28,8 @@ function fetch_data_and_render(){
     "maxResults": 50,
     "fields":["id","key", "duedate", "summary",
               "progress","timespent", "status", "customfield_12551",
-              // "subtasks",
-              "assignee", "fixVersions", "issuetype"]
+              // "subtasks", "fixVersions",
+              "assignee", "customfield_11150", "issuetype"]
   }
   var lstorage = chrome.storage.local;
   var md5_key = md5(JSON.stringify(queryJson));
@@ -94,11 +95,21 @@ function create_ticket(ticket){
                       + ticket.fields.assignee.displayName +
                       '</em>' + duedate_span(ticket.fields.customfield_12551) + '</p>');
   ticket_html.prepend(status_label(ticket.fields.status));
-  ticket_html.prepend(sprint_span(ticket.fields.fixVersions));
+  ticket_html.prepend(sprint_span(sprint_name(ticket.fields.customfield_11150)));
   // console.log(ticket_html);
   return ticket_html;
 }
 
+function sprint_name(sprint_string){
+  var result = '';
+  console.log('xxxxxxxxx');
+  if(sprint_string && sprint_string.length > 0) {
+    console.log(sprint_string[0]);
+    console.log(sprint_string[0].match(/,name=([^,]*),/)[1]);
+    result = sprint_string[0].match(/,name=([^,]*),/)[1];
+  }
+  return result;
+}
 function issuetype_icon(issuetype){
   var result = '';
   if(issuetype) {
@@ -108,8 +119,8 @@ function issuetype_icon(issuetype){
 
 function sprint_span(sprint) {
   var result = '<span class="label fix-version label-default">Back log</span>';
-  if (sprint && sprint.length > 0) {
-    result = '<span class="label fix-version label-default">' + sprint[0].name + '</span>';
+  if (sprint != '') {
+    result = '<span class="label fix-version label-default">' + sprint + '</span>';
   }
   return result;
 }
