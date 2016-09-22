@@ -22,4 +22,11 @@ var spin_opts = {
 , position: 'absolute' // Element positioning
 };
 var manifest = chrome.runtime.getManifest();
-var expiretime = 60*60*5; // expired in 5 minutes
+var expiretime = 1000*60*5; // expired in 5 minutes
+
+var timestart = Date.now();
+function timeMark(mark){
+  console.warn(" Bof [" + mark + "] =================");
+  console.log(Date.now() - timestart);
+  timestart = Date.now();
+}

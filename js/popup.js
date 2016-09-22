@@ -102,14 +102,12 @@ function create_ticket(ticket){
 
 function sprint_name(sprint_string){
   var result = '';
-  console.log('xxxxxxxxx');
   if(sprint_string && sprint_string.length > 0) {
-    console.log(sprint_string[0]);
-    console.log(sprint_string[0].match(/,name=([^,]*),/)[1]);
     result = sprint_string[0].match(/,name=([^,]*),/)[1];
   }
   return result;
 }
+
 function issuetype_icon(issuetype){
   var result = '';
   if(issuetype) {
@@ -190,7 +188,6 @@ function open_jira_ticket(jira_key){
   chrome.tabs.create({url: jira_url+'/browse/' + jira_key, active: false});
   $("input#jira_number").val('');
 }
-
 $(function() {
   console.profile('性能分析器');
   if(jira_url == undefined || jira_url.length < 1
@@ -202,15 +199,21 @@ $(function() {
   else{
     var spinner = new Spinner(spin_opts).spin();
     $.when(
-      $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el),
-      setTimeout(function(){if (jql == undefined ||  jql.length < 1 ) {
-        $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
-      }
-      else{
-        fetch_data_and_render();
-      }
-      },1333)
-    ).done();
+      $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el)
+    ).done(
+      fetch_data_and_render()
+    );
+
+    // $.when(
+    //   $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el),
+    //   setTimeout(function(){if (jql == undefined ||  jql.length < 1 ) {
+    //     $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
+    //   }
+    //   else{
+    //     fetch_data_and_render();
+    //   }
+    //   }, 55)
+    // ).done();
   }
   // $.when().then(function( x ) {
   // });
