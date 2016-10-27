@@ -18,7 +18,7 @@ storage.get('password', function(items){
 storage.get('jql', function(items){
   jql = items.jql;
 });
-
+var refresh_cache_button = $('<span class="glyphicon glyphicon-refresh"></span>');
 // customfield_12551 => dev duedate
 // customfield_11150 => sprint
 function fetch_data_and_render(){
@@ -42,18 +42,42 @@ function fetch_data_and_render(){
     }
     else{
       console.log('cache data is undefined or expired');
-      jira_tool_box = new JTB(jira_url, username, password);
-      cache_data = jira_tool_box.query(queryJson);
-      // console.log(cache_data);
-      var data_to_cache = {};
-      data_to_cache[md5_key] = {_data: cache_data, _expiretime: new Date().getTime() + expiretime}
-      console.log('save data to cache');
-      lstorage.set(data_to_cache);
+      refresh_cache(jql);
     }
     render_tickets(cache_data);
   });
 }
 
+function reload_issue_list() {
+  $("#jira-list").empty();
+  var spinner = new Spinner(spin_opts).spin();
+  $(".alert").html("<strong>Loading jira tickets..</strong>").show().append(spinner.el);
+  $.when(refresh_cache(jql))
+   .then(function(e){
+      fetch_data_and_render();
+    });
+}
+
+function refresh_cache(jql){
+  var queryJson = {
+    'jql': jql,
+    "startAt": 0,
+    "maxResults": 50,
+    "fields":["id","key", "duedate", "summary",
+              "progress","timespent", "status", "customfield_12551",
+              // "subtasks", "fixVersions",
+              "assignee", "customfield_11150", "issuetype"]
+  }
+  jira_tool_box = new JTB(jira_url, username, password);
+  cache_data = jira_tool_box.query(queryJson);
+  // console.log(cache_data);
+  var md5_key = md5(JSON.stringify(queryJson));
+  var data_to_cache = {};
+  var lstorage = chrome.storage.local;
+  data_to_cache[md5_key] = {_data: cache_data, _expiretime: new Date().getTime() + expiretime}
+  console.log('save data to cache');
+  lstorage.set(data_to_cache);
+}
 
 function render_tickets(data){
   // jira_tool_box = new JTB(jira_url, username, password);
@@ -67,18 +91,31 @@ function render_tickets(data){
   //             // "subtasks",
   //             "assignee", "fixVersions", "issuetype"]
   // });
-  if (data.issues.length > 0) {
-    $(".alert").remove();
-    $(".myTabContent").removeClass('hidden');
-    $("#jira-list").html('<h3>Tickets</h3>');
-    append_tickets(data.issues);
+  console.log("render Tickets");
+  for (var i = 1; i <= 50; i++) {
+    dataIsReady(i);
+    if(data != null && data.issues.length > 0){
+      $(".alert").hide();
+      $(".myTabContent").removeClass('hidden');
+      $("#jira-list").html('<h3>Tickets&nbsp;<span class="glyphicon glyphicon-refresh"></span></h3>');
+      append_tickets(data.issues);
+      break;
+    }
   }
 }
 
+function dataIsReady(i) {
+  setTimeout(function(){
+    console.log("try "+i+" times.");
+  }, 100);
+}
+
 function append_tickets(tickets){
+  var tickets_html = [];
   for (var i = 0; i < tickets.length; i++) {
-    $("#jira-list").append(create_ticket(tickets[i]));
+    tickets_html.push(create_ticket(tickets[i]));
   }
+  $("#jira-list").append(tickets_html);
 }
 
 function create_ticket(ticket){
@@ -189,7 +226,7 @@ function open_jira_ticket(jira_key){
   $("input#jira_number").val('');
 }
 $(function() {
-  console.profile('性能分析器');
+  console.profile('performace analysing');
   if(jira_url == undefined || jira_url.length < 1
       || prefix == undefined ||  prefix.length < 1){
     $('.container').html('<div class="alert alert-dismissible alert-success">'+
@@ -200,8 +237,9 @@ $(function() {
     var spinner = new Spinner(spin_opts).spin();
     $.when(
       $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el)
-    ).done(
-      fetch_data_and_render()
+    ).then(function(){
+      fetch_data_and_render();
+      }
     );
 
     // $.when(
@@ -235,6 +273,10 @@ $(function() {
     var jira_number = $("#jira_number").val();
     open_jira_ticket(prefix+'-'+jira_number);
     return false;
+  });
+  $("#jira-list").on('click', 'span', function(e){
+    console.log('click');
+    reload_issue_list();
   });
   // $('[data-toggle="tooltip"]').tooltip();
   console.profileEnd();

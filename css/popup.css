@@ -11,6 +11,9 @@ body {
 .progress {
   margin-bottom: 0;
 }
+#jira-list span.glyphicon {
+  cursor: pointer;
+}
 .list-group-item>.status {
   position: relative;
   margin-top: -11px;
