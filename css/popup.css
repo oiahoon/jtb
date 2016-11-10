@@ -14,6 +14,11 @@ body {
 #jira-list span.glyphicon {
   cursor: pointer;
 }
+.refresh-data {
+  font-size: 0.7em;
+  color: #217dbb;
+  font-weight: 800;
+}
 .list-group-item>.status {
   position: relative;
   margin-top: -11px;

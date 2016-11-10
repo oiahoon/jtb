@@ -18,7 +18,8 @@ storage.get('password', function(items){
 storage.get('jql', function(items){
   jql = items.jql;
 });
-var refresh_cache_button = $('<span class="glyphicon glyphicon-refresh"></span>');
+var refresh_cache_button = $('<span class="glyphicon glyphicon-refresh refresh-data" data-toggle="tooltip" data-placement="right" title="click to refresh data!"></span>');
+
 // customfield_12551 => dev duedate
 // customfield_11150 => sprint
 function fetch_data_and_render(){
@@ -35,27 +36,30 @@ function fetch_data_and_render(){
   var md5_key = md5(JSON.stringify(queryJson));
   var cache_data = undefined;
   // console.log('======== query key : '+md5_key);
+
   lstorage.get(md5_key, function(items){
     if(items[md5_key] && items[md5_key]._expiretime && items[md5_key]._expiretime >= (new Date().getTime())){
-        console.log('cache data exist');
+        console.log('fetch data from cache');
         cache_data = items[md5_key]._data;
+        render_tickets(cache_data);
     }
     else{
-      console.log('cache data is undefined or expired');
-      refresh_cache(jql);
+      console.log('cache data is undefined or expired, refresh!');
+      cache_data = refresh_cache(jql);
+      render_tickets(cache_data);
     }
-    render_tickets(cache_data);
   });
+
+
 }
 
 function reload_issue_list() {
-  $("#jira-list").empty();
-  var spinner = new Spinner(spin_opts).spin();
-  $(".alert").html("<strong>Loading jira tickets..</strong>").show().append(spinner.el);
-  $.when(refresh_cache(jql))
-   .then(function(e){
-      fetch_data_and_render();
-    });
+    $("#jira-list").empty();
+    var spinner = new Spinner(spin_opts).spin();
+    $(".alert").html("<strong>Loading jira tickets..</strong>").show().append(spinner.el);
+    var cache_data = refresh_cache(jql);
+    console.log('fetch data ok');
+    setTimeout(function(){render_tickets(cache_data);}, 543)
 }
 
 function refresh_cache(jql){
@@ -77,6 +81,7 @@ function refresh_cache(jql){
   data_to_cache[md5_key] = {_data: cache_data, _expiretime: new Date().getTime() + expiretime}
   console.log('save data to cache');
   lstorage.set(data_to_cache);
+  return cache_data;
 }
 
 function render_tickets(data){
@@ -97,7 +102,9 @@ function render_tickets(data){
     if(data != null && data.issues.length > 0){
       $(".alert").hide();
       $(".myTabContent").removeClass('hidden');
-      $("#jira-list").html('<h3>Tickets&nbsp;<span class="glyphicon glyphicon-refresh"></span></h3>');
+      var title_bar = $('<h3>Tickets&nbsp;</h3>').append(refresh_cache_button);
+      $("#jira-list").html(title_bar);
+      $('.refresh-data').tooltip();
       append_tickets(data.issues);
       break;
     }
@@ -242,19 +249,8 @@ $(function() {
       }
     );
 
-    // $.when(
-    //   $(".alert").html("<strong>Loading jira tickets..</strong>").append(spinner.el),
-    //   setTimeout(function(){if (jql == undefined ||  jql.length < 1 ) {
-    //     $(".alert").html('<strong>Hello!</strong> You can set you tickets jql from <a href="#" class="alert-link option-page-link">options!</a>.')
-    //   }
-    //   else{
-    //     fetch_data_and_render();
-    //   }
-    //   }, 55)
-    // ).done();
   }
-  // $.when().then(function( x ) {
-  // });
+
   $("div.container").on('click', 'a.option-page-link', function(event) {
     if (chrome.runtime.openOptionsPage) {
       // New way to open options pages, if supported (Chrome 42+).
@@ -275,9 +271,8 @@ $(function() {
     return false;
   });
   $("#jira-list").on('click', 'span', function(e){
-    console.log('click');
+    console.log('manual refreshing the data.');
     reload_issue_list();
   });
-  // $('[data-toggle="tooltip"]').tooltip();
   console.profileEnd();
 });
