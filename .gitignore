@@ -1,2 +1,10 @@
-.DS_Store
-*.zip
+node_modules
+temp
+.tmp
+dist
+.sass-cache
+app/bower_components
+test/bower_components
+package
+app/scripts
+app/styles

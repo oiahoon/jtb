@@ -1,0 +1,13 @@
+$padding: 20px;
+$fontColor: #003046;
+$pageWidth: 467px;
+$fontSize: 14px;
+
+body {
+  padding: $padding;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: $fontSize;
+  color: $fontColor;
+  width: $pageWidth;
+  min-width: $pageWidth;
+}
