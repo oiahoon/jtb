@@ -1,3 +1,24 @@
+/* variables */
+$vgrid: 30px;
+$gutter: 30px;
+$pgcolor: #FFF;
+$textcolor: #777;
+$hovercolor: #2690d8;
+$basefontsize: 16px;
+$statusBarWidth: 10px;
+
+.layout {
+  padding-left: 1em;
+  left: 0;
+}
+#workaround-4296411 {
+  display: none;
+  height: 1px;
+  width: 1px;
+}
+label.seperator {
+  padding-left: 0.5em;
+}
 .button-success,
 .button-error,
 .button-warning,
@@ -22,32 +43,110 @@
     background: rgb(66, 184, 221); /* this is a light blue */
 }
 
-#list {
-  margin-left: 0px;
-  width: 96%;
-  height: 100%;
-  border-right: 1px solid #ddd;
+nav.archive-links {
+  background-color: $pgcolor;
+  box-sizing: content-box;
+  padding: 1em 0 0.5em 0;
+  margin: auto;
+  /* Ordered list with custom counter */
+  ol {
+    counter-reset: li;
+    overflow: hidden;
+    border: 2px solid darken($pgcolor, 15%);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0px;
+  }
 
-  .ticket-item {
-    padding: 0.9em 1em;
-    border-bottom: 1px solid #ddd;
-    border-left: 6px solid transparent;
-    :hover {
-      background: #eee;
-    }
-    .ticket-name {
-      text-transform: uppercase;
-      color: #999;
-    }
-    .ticket-subject {
-      margin: 0;
-    }
-    .ticket-desc {
-      font-size: 80%;
-      margin: 0.4em 0;
+  ol li {
+    float: left;
+    clear: left;
+    width: 100%;
+    margin: 0;
+    list-style: none;
+  }
+
+  ol,
+  ol li,
+  ol li a { display: block; }
+
+  ol li a {
+    font-size: ($basefontsize * 0.6875);
+    height: ($vgrid * 2 - 1);
+    position: relative;
+    text-decoration: none;
+    span.link-title {
+      overflow : hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
-  .ticket-item-bug {
-     border-left: 6px solid #ff5722;
+
+  ol li .main-image:after,
+  ol li .no-main-image:after {
+    color: lighten($textcolor, 25%);
+    content: counter(li, decimal-leading-zero);
+    counter-increment: li;
+    font-size: $vgrid;
+    line-height: ($vgrid * 2 - 1);
+    height: ($vgrid * 2 - 1);
+    width: ($gutter * 2);
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 1px;
   }
+
+  li .main-image,
+  li .no-main-image {
+    float: left;
+    margin-right: 1.5em;
+    width: $statusBarWidth;
+    height: ($vgrid * 2);
+    background: darken($pgcolor, 10%);
+  }
+
+  li .main-image {
+    // background-image: url('http://placekitten.com/g/200/200');
+    background-size: cover;
+    background-position: center center;
+  }
+  li .bug { background: #ff5722; }
+  li .story { background: #03a9f4; }
+
+  a:link,
+  a:visited,
+  a:hover,
+  a:active { color: darken($textcolor, 50%); }
+
+  ol li a:hover .main-image:after,
+  ol li a:hover .no-main-image:after { color: $hovercolor; }
+
+  ol li a:active .main-image:after,
+  ol li a:active .no-main-image:after,
+  ol li.active a .main-image:after,
+  ol li.active a .no-main-image:after { color: $textcolor; }
+
+
+  li + li { border-top: 1px solid darken($pgcolor, 15%); }
+
+  li span {
+    display: block;
+    line-height: 1.5em;
+  }
+
+  /* Style the title, date & comments of each entry */
+  span.link-title {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 0.6875em;
+    font-size: 1em;
+  }
+
+  span.link-excerpt { color: lighten($textcolor, 30%); }
+
 }

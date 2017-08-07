@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
-    "pure": "^1.0.0"
+    "pure": "^1.0.0",
+    "vue-ls": "^2.2.18"
   },
   "devDependencies": {
     "chai": "^4.1.0",

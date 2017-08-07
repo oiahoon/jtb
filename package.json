@@ -54,8 +54,10 @@
     "bootstrap": "^3.3.7",
     "css-loader": "^0.28.4",
     "purecss": "^1.0.0",
+    "spin": "0.0.1",
     "vue": "^2.4.1",
     "vue-loader": "^13.0.1",
+    "vue-ls": "^2.2.18",
     "vue-template-compiler": "^2.4.1",
     "webpack": "^3.2.0",
     "webpack-stream": "^3.2.0"
