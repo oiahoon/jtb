@@ -57,4 +57,4 @@ gulp build
   - [yeoman](http://yeoman.io/)
 
 ----
-Built by (c) Tim Brust and contributors. Released under the MIT license.
+Built by (c) Joey Huang and contributors. Released under the MIT license.
