@@ -2,7 +2,7 @@
 
 console.log('\'Allo \'Allo! Popup');
 import Vue from 'vue';
-import Axios from 'axios'
+import Axios from 'axios';
 import VueLocalStorage from 'vue-ls';
 
 Vue.prototype.$ajax = Axios

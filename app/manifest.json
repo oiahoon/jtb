@@ -37,10 +37,11 @@
     "webRequest",
     "webRequestBlocking"
   ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
+  // "options_ui": {
+  //   "page": "options.html",
+  //   "chrome_style": true
+  // },
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

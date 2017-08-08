@@ -1,5 +1,5 @@
 {
-  "name": "jtb",
+  "name": "jira tool box",
   "private": true,
   "engines": {
     "node": ">=0.8.0"

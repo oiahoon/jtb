@@ -6,11 +6,36 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
-    <link href="styles/main.css" rel="stylesheet">
+    <link href="bower_components/pure/pure.css" rel="stylesheet">
+    <link href="styles/options.css" rel="stylesheet">
     <!-- endbuild -->
   </head>
   <body>
-    <h1>'Allo, 'Allo!</h1>
+    <div class="container">
+      <form>
+        <h1>Jira Tool Box</h1>
+
+        <div class="form-group">
+          <input type="text" required="required"/>
+          <label class="control-label" for="input">Jira link</label><i class="bar"></i>
+        </div>
+
+        <div class="form-group">
+          <input type="text" required="required"/>
+          <label class="control-label" for="input">Project Name</label><i class="bar"></i>
+        </div>
+
+
+        <div class="form-group">
+          <textarea rows="6" required="required"></textarea>
+          <label class="control-label" for="textarea">JQL or Filter</label><i class="bar"></i>
+        </div>
+
+      </form>
+      <div class="button-container">
+        <button class="button" type="button"><span>Save</span></button>
+      </div>
+    </div>
 
     <!-- build:js scripts/options-vendor.js -->
     <!-- bower:js -->
