@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <!-- build:css styles/options-vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
@@ -11,37 +12,14 @@
     <!-- endbuild -->
   </head>
   <body>
-    <div class="container">
-      <form>
-        <h1>Jira Tool Box</h1>
-
-        <div class="form-group">
-          <input type="text" required="required"/>
-          <label class="control-label" for="input">Jira link</label><i class="bar"></i>
-        </div>
-
-        <div class="form-group">
-          <input type="text" required="required"/>
-          <label class="control-label" for="input">Project Name</label><i class="bar"></i>
-        </div>
-
-
-        <div class="form-group">
-          <textarea rows="6" required="required"></textarea>
-          <label class="control-label" for="textarea">JQL or Filter</label><i class="bar"></i>
-        </div>
-
-      </form>
-      <div class="button-container">
-        <button class="button" type="button"><span>Save</span></button>
-      </div>
-    </div>
+    <div id="app"></div>
 
     <!-- build:js scripts/options-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
 
+    <script src="scripts/common.js"></script>
     <!-- build:js scripts/options.js -->
     <script src="scripts/options.js"></script>
     <!-- endbuild -->

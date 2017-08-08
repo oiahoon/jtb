@@ -5,6 +5,7 @@ module.exports = {
         chromereload: './chromereload.js',
         contentscript: './contentscript.js',
         popup: './popup.js',
+        options: './options.js',
         common: './common.js',
     },
     output: { filename: '[name].js' },

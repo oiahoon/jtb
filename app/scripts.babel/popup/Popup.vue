@@ -7,7 +7,7 @@
           <label for="seperator" class="seperator">-</label>
         </div>
         <div class="pure-u-13-24">
-          <input name="jira_number" id="jira_number" v-model.trim="jiraNumber" placeholder="JIRA ID" autofocus type="text" class="pure-input-1">
+          <input name="jira_number" id="jira_number" v-model.number.trim="jiraNumber" placeholder="JIRA ID" autofocus type="text" class="pure-input-1">
         </div>
         <div class="pure-u-1-5">
           <button type="submit" class="button-secondary pure-button">Go</button>
@@ -26,9 +26,9 @@
     },
     data() {
       return {
-        jiraLink: this.$ls.get('jiraLink', 'https://jirafnd.dev.activenetwork.com/browse/VEB-2043'),
-        projectName: this.$ls.get('project'),
-        jql: this.$ls.get('jql', 'no value'),
+        jiraLink: this.$ls.get('jiraLink'),
+        projectName: this.$ls.get('project', 'VEB'),
+        jql: this.$ls.get('jql', 'please entrer "filter=xxx" or a JQL'),
         jiraNumber: this.jiraNumber
       }
     },

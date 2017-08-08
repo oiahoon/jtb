@@ -1,6 +1,6 @@
 <template>
   <li :data-id="item.id" :data-key="item.key">
-    <a :href="item.url">
+    <a :href="item.url" @click.prevent="newtab($event)">
       <div class="main-image" :class="classObject" :issuetype="item.issuetype"></div>
       <span class="link-title"><b>[{{ item.key }}]</b>{{ item.summary }}</span>
       <span class="link-excerpt">{{ item.issuetype }} / <time class="date" datetime="November 12 2012">{{ item.dev_duedate }}</time> / {{ item.assignee }}</span>
@@ -20,6 +20,12 @@
           bug: this.item.issuetype && bugPtn.test(this.item.issuetype),
           story: this.item.issuetype && storyPtn.test(this.item.issuetype)
         }
+      }
+    },
+    methods: {
+      newtab: function(event){
+        var url = event.currentTarget.href
+        chrome.tabs.create({url: url, active: false})
       }
     }
   }
