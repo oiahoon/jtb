@@ -1,6 +1,6 @@
 {
   "name": "__MSG_appName__",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
@@ -15,27 +15,11 @@
     ]
   },
   "permissions": [
-    "tabs",
+    "activeTab",
     "http://*/*",
     "https://*/*",
     "background",
-    "bookmarks",
-    "clipboardRead",
-    "clipboardWrite",
-    "contentSettings",
-    "cookies",
-    "*://*.google.com/",
-    "debugger",
-    "history",
-    "idle",
-    "management",
-    "notifications",
-    "pageCapture",
-    "topSites",
-    "storage",
-    "webNavigation",
-    "webRequest",
-    "webRequestBlocking"
+    "notifications"
   ],
   "options_page": "options.html",
   "content_scripts": [
