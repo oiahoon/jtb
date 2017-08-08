@@ -17,7 +17,7 @@
 
 ## Changelog
 
-See CHANGELOG.md for a complete changelog.
+See [CHANGELOG.md](CHANGELOG.md) for a complete changelog.
 
 ## Support
 
@@ -52,8 +52,8 @@ gulp build
 ```
 
 ## via & thanks
-  - [generator-chrome-extension]https://github.com/yeoman/generator-chrome-extension
-  - [yeoman]http://yeoman.io/
+  - [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension)
+  - [yeoman](http://yeoman.io/)
 
 ----
 Built by (c) Tim Brust and contributors. Released under the MIT license.
