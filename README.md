@@ -1,5 +1,5 @@
 # Jira Tool Box (JTB)
-[![Code Climate](https://codeclimate.com/github/oiahoon/go-jira/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/go-jira)
+[![Code Climate](https://codeclimate.com/github/oiahoon/jtb/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/jtb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ----
 ## info
