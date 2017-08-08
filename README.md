@@ -1,5 +1,6 @@
 # Jira Tool Box (JTB)
 [![Code Climate](https://codeclimate.com/github/oiahoon/go-jira/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/go-jira)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ----
 ## info
   Jira Tool Box(short just JTB) is designed to speed up your workflow. It's simple to use!
