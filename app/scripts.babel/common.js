@@ -1,5 +1,5 @@
-var storage = chrome.storage.sync;
-var spin_opts = {
+global.storage = chrome.storage.sync;
+global.spin_opts = {
   lines: 7 // The number of lines to draw
 , length: 0 // The length of each line
 , width: 14 // The line thickness
@@ -21,12 +21,15 @@ var spin_opts = {
 , hwaccel: false // Whether to use hardware acceleration
 , position: 'absolute' // Element positioning
 };
-var manifest = chrome.runtime.getManifest();
-var expiretime = 1000*60*5; // expired in 5 minutes
+global.manifest = chrome.runtime.getManifest();
+global.expiretime = 1000*60*5; // expired in 5 minutes
 
-var timestart = Date.now();
+global.storage_prefix = 'jtb__';
+global.defaultJql = 'project = veb AND issuetype in standardIssueTypes() AND status in (Open, \'In Progress\', Test, Review, Design, Coding, \'Review Queue\', \'Code Review\') AND assignee in (currentUser()) ORDER BY created DESC';
+
+global.timestart = Date.now();
 function timeMark(mark){
-  console.warn(" Bof [" + mark + "] =================");
+  console.warn(' Bof [' + mark + '] ================');
   console.log(Date.now() - timestart);
   timestart = Date.now();
 }

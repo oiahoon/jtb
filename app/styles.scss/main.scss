@@ -1,0 +1,18 @@
+$padding: 1em;
+$pageWidth: 467px;
+$basefontsize: 14px;
+
+$vgrid: 30px;
+$gutter: 30px;
+$pgcolor: #FFF;
+$textcolor: #777;
+$hovercolor: #2690d8;
+
+body {
+  padding: $padding;
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: $basefontsize;
+  color: $textcolor;
+  width: $pageWidth;
+  min-width: $pageWidth;
+}
