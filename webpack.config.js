@@ -4,9 +4,9 @@ module.exports = {
         background: './background.js', // remove unused
         chromereload: './chromereload.js',
         contentscript: './contentscript.js',
+        common: './common.js',
         popup: './popup.js',
         options: './options.js',
-        common: './common.js',
     },
     output: { filename: '[name].js' },
     module: {

@@ -1,7 +1,7 @@
 {
-  "name": "jtb",
+  "name": "jira tool box",
   "private": true,
-  "version": "0.0.0",
+  "version": "4.0.0",
   "dependencies": {
     "pure": "^1.0.0",
     "vue-ls": "^2.2.18"

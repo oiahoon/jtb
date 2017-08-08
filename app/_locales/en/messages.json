@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "jtb",
-    "description": "The name of the application"
+    "message": "Jira Tool Box!",
+    "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚"
   },
   "appDescription": {
-    "message": "My Chrome Extension",
-    "description": "The description of the application"
+    "message": "Jira Tool Box!",
+    "description": "☛ Simple to use, GoJira can help you enter and track you jira tickets easily! ☚"
   }
 }

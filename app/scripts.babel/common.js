@@ -24,10 +24,8 @@ global.spin_opts = {
 global.manifest = chrome.runtime.getManifest();
 global.expiretime = 1000*60*5; // expired in 5 minutes
 
-
 global.storage_prefix = 'jtb__';
 global.defaultJql = 'project = veb AND issuetype in standardIssueTypes() AND status in (Open, \'In Progress\', Test, Review, Design, Coding, \'Review Queue\', \'Code Review\') AND assignee in (currentUser()) ORDER BY created DESC';
-
 
 global.timestart = Date.now();
 function timeMark(mark){

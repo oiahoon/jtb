@@ -1,6 +1,5 @@
 'use strict';
 
-console.log('\'Allo \'Allo! Option');
 import Vue from 'vue';
 import VueLocalStorage from 'vue-ls';
 

@@ -14,7 +14,7 @@ Vue.use(VueLocalStorage, options);
 import Popup from './popup/Popup.vue';
 import Noconfig from './popup/Noconfig.vue';
 
-console.log(Vue.ls.get('project'))
+console.log(Vue.ls.get('jiraLink'))
 if (Vue.ls.get('jiraLink')=='' || Vue.ls.get('project')=='' || Vue.ls.get('jql')==''
   || Vue.ls.get('jiraLink')== undefined || Vue.ls.get('project')== undefined || Vue.ls.get('jql')== undefined) {
   new Vue({

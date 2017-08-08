@@ -48,7 +48,7 @@
       retriveJiraData: function(){
         var jira_data    = []
         var jql          = this.$ls.get('jql')
-        var originUrl    = this.$ls.get('jira_url')
+        var originUrl    = this.$ls.get('jiraLink')
         var apiSearchUrl = originUrl + "/rest/api/2/search"
         var vm = this
 
