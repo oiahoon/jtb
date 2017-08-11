@@ -1,6 +1,7 @@
 <template>
   <nav class="archive-links pure-u-23-24">
-    <ol>
+    <div class="loader" :class="loadingStatus">Loading...</div>
+    <ol :class="listShow">
       <item-component
         v-for="(item, index) in items"
         v-bind:item="item"
@@ -20,7 +21,11 @@
     data() {
       var items = []
       this.retriveJiraData()
-      return { items }
+      return {
+        items: items,
+        loadingStatus: false,
+        listShow: 'hidden'
+      }
       // return this.sampleData()
       // return {
       //   items: this.sampleData()
@@ -28,6 +33,13 @@
     },
     components: {
       ItemComponent
+    },
+    watch: {
+      items: function(){
+        console.log(this.items)
+        this.loadingStatus = 'hidden',
+        this.listShow = false
+      }
     },
     methods: {
       sampleData: function(){
