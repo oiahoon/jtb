@@ -479,6 +479,10 @@ fieldset {
   }
 }
 
+span.message {
+  padding-top: 1em;
+  font-size: 1em;
+}
 /* --------------------------
  * Code Styles
  * --------------------------
@@ -525,3 +529,4 @@ code {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+

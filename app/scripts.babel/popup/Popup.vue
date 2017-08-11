@@ -2,11 +2,11 @@
   <div class="container">
     <div class="pure-g search-box">
       <form class="pure-form pure-u-23-24" name="jira" id="jira" @submit.prevent="goTicket()">
-        <div class="pure-u-5-24">
-          <input name="project_name" class="pure-input-3-4" v-model="projectName" />
-          <label for="seperator" class="seperator">-</label>
+        <div class="pure-u-9-24">
+          <input name="project_name" class="pure-input-3-4" v-model="projectName" placeholder="Empty" title="Your frequently-used project’s ABBR" />
+          <label for="seperator" class="seperator">&minus;</label>
         </div>
-        <div class="pure-u-13-24">
+        <div class="pure-u-9-24">
           <input name="jira_number" id="jira_number" v-model.number.trim="jiraNumber" placeholder="JIRA ID" autofocus type="text" class="pure-input-1">
         </div>
         <div class="pure-u-1-5">
@@ -27,8 +27,8 @@
     data() {
       return {
         jiraLink: this.$ls.get('jiraLink'),
-        projectName: this.$ls.get('project', 'VEB'),
-        jql: this.$ls.get('jql', 'please entrer "filter=xxx" or a JQL'),
+        projectName: this.$ls.get('project', ''),
+        jql: this.$ls.get('jql', ''),
         jiraNumber: this.jiraNumber
       }
     },
@@ -37,7 +37,8 @@
         return new URL(this.jiraLink).origin
       },
       jira_key: function(){
-        return this.projectName + '-' + this.jiraNumber
+        if(this.projectName == '') { return this.jiraNumber }
+        else { return this.projectName + '-' + this.jiraNumber }
       }
     },
     methods:{

@@ -18,11 +18,13 @@
     name: 'list',
     props: ['jiraLink'],
     data() {
+      var items = []
       this.retriveJiraData()
+      return { items }
       // return this.sampleData()
-      return {
-        items: this.sampleData()
-      }
+      // return {
+      //   items: this.sampleData()
+      // }
     },
     components: {
       ItemComponent
@@ -52,6 +54,9 @@
         var apiSearchUrl = originUrl + "/rest/api/2/search"
         var vm = this
 
+        if(!jql && this.$ls.get('project')){
+          jql = 'project = '+ this.$ls.get('project')
+        }
         this.$ajax.post(apiSearchUrl, {
             'jql': jql,
             "startAt": 0,
@@ -67,16 +72,7 @@
           var tickets = response.data.issues
           tickets.forEach(function(ticket){
             vm.items.push(
-              new Ticket({
-                id: ticket.id,
-                key: ticket.key,
-                issuetype: ticket.fields.issuetype.name,
-                summary: ticket.fields.summary,
-                assignee: ticket.fields.assignee.displayName,
-                dev_duedate: ticket.fields.customfield_12551,
-                status: ticket.fields.status,
-                sprint: ticket.fields.customfield_11150
-              })
+              new Ticket(ticket)
             )
           })
         })
@@ -84,16 +80,16 @@
           console.log(error);
         });
 
-        function Ticket(dataHash) {
-          this.id             = dataHash['id'];
-          this.key            = dataHash['key'];
-          this.issuetype      = dataHash['issuetype'];
-          this.summary        = dataHash['summary'];
-          this.assignee       = dataHash['assignee'];
-          this.dev_duedate    = dataHash['dev_duedate'];
-          this.status         = dataHash['status'];
-          this.sprint         = dataHash['sprint'];
-          this.url            = originUrl + '/browse/' + dataHash['key'];
+        function Ticket(item) {
+          this.id             = item.id;
+          this.key            = item.key;
+          this.issuetype      = (item.fields.issuetype) ? item.fields.issuetype.name : 'none';
+          this.summary        = item.fields.summary;
+          this.assignee       = (item.fields.assignee) ? item.fields.assignee.displayName : 'nobody';
+          this.dev_duedate    = (item.fields.customfield_12551) ? item.fields.customfield_12551 : '';
+          this.status         = item.fields.status;
+          this.sprint         = (item.fields.customfield_11150) ? item.fields.customfield_11150 : '';
+          this.url            = originUrl + '/browse/' + item.key;
         }
       }
     }

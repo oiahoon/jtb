@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### version 4.0.4
+  1. project & JQL are no longer required
+  2. while JQL isn't provide the list related to the project
+  3. give some tips on options page.
+
 ### version 4.0.3
   1. fix a fatal error caused by permission missing
 

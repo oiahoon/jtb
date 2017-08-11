@@ -16,6 +16,9 @@
       <div class="form-group">
         <textarea rows="6" required="required" v-model.trim="jql"></textarea>
         <label class="control-label" for="textarea">JQL or Filter</label><i class="bar"></i>
+        <span class="pure-form-message message">you can find the filter id & JQL in
+          <code>http(s)://your.jira.link/secure/ManageFilters.jspa</code>
+        </span>
       </div>
 
     </form>
