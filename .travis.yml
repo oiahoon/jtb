@@ -9,8 +9,8 @@ install:
   - npm install --save-dev gulp
   - npm install --global yo gulp-cli bower
   - npm install --save-dev babel-register
-  - npm install
   - bower install
+  - npm install
  
 script:
   - gulp babel
