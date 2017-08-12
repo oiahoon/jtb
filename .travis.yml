@@ -5,8 +5,8 @@ node_js:
   - "stable"
 
 install:
-  - npm install --global yo gulp-cli bower
   - npm install -g gulp
+  - npm install --global yo gulp-cli bower
   - npm install --save-dev babel-register
   - npm install
   
