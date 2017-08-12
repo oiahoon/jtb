@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - "6"
+  - "stable"
+
+install:
+  - npm install
+
+script:
+  - gulp babel
+  - gulp build
+
+after_success:
+  - gulp package
+
+notifications:
+  email: 4296411@qq.com
