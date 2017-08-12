@@ -42,6 +42,8 @@ git clone https://github.com/oiahoon/go-jira.git
 # cd 
 cd go-jira
 
+npm install
+
 # Transform updated source written by ES2015 (default option)
 gulp babel
 
@@ -50,6 +52,18 @@ gulp watch
 
 # Make a production version extension
 gulp build
+```
+if you meet the `check shasum failed` error, maybe you are in China as me,
+there are 3 ways to resolve:
+
+```bashshell
+# 1. config command
+npm config set registry http://registry.cnpmjs.org 
+npm info underscore （it will return response）
+# 2. npm cli
+npm --registry http://registry.cnpmjs.org info underscore 
+# 3. vim ~/.npmrc 
+registry = http://registry.cnpmjs.org
 ```
 
 ## via & thanks
