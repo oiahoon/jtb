@@ -42,6 +42,8 @@ git clone https://github.com/oiahoon/go-jira.git
 # cd 
 cd go-jira
 
+npm install
+
 # Transform updated source written by ES2015 (default option)
 gulp babel
 
@@ -51,10 +53,28 @@ gulp watch
 # Make a production version extension
 gulp build
 ```
+if you meet the `check shasum failed` error, maybe you are in China as me,
+there are 3 ways to resolve:
+
+```bashshell
+# 1. config command
+npm config set registry http://registry.cnpmjs.org 
+npm info underscore （it will return response）
+# 2. npm cli
+npm --registry http://registry.cnpmjs.org info underscore 
+# 3. vim ~/.npmrc 
+registry = http://registry.cnpmjs.org
+```
 
 ## via & thanks
   - [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension)
   - [yeoman](http://yeoman.io/)
+  - [Vue](https://github.com/vuejs/vue)
+  - [Vue ls](https://github.com/RobinCK/vue-ls)
+  - [pure.css](https://purecss.io/)
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb?ref=badge_large)
 
 ----
 Built by (c) Joey Huang and contributors. Released under the MIT license.
