@@ -13,6 +13,7 @@ install:
   - bower install
  
 script:
+  - gulp babel
   - gulp build
 
 after_success:
