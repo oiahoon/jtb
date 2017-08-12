@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-  import ListComponent from './list.vue'
+  import ListComponent from './List.vue'
   export default {
     name: 'JTB',
     components: {
