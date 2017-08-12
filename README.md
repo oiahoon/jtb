@@ -1,7 +1,7 @@
 # Jira Tool Box (JTB)
 [![Code Climate](https://codeclimate.com/github/oiahoon/jtb/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/jtb)
 [![Build Status](https://travis-ci.org/oiahoon/jtb.svg?branch=master)](https://travis-ci.org/oiahoon/jtb)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb?ref=badge_shield)
 ----
 ## info
   Jira Tool Box(short just JTB) is designed to speed up your workflow. It's simple to use!
