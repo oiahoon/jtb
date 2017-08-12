@@ -69,6 +69,12 @@ registry = http://registry.cnpmjs.org
 ## via & thanks
   - [generator-chrome-extension](https://github.com/yeoman/generator-chrome-extension)
   - [yeoman](http://yeoman.io/)
+  - [Vue](https://github.com/vuejs/vue)
+  - [Vue ls](https://github.com/RobinCK/vue-ls)
+  - [pure.css](https://purecss.io/)
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb?ref=badge_large)
 
 ----
 Built by (c) Joey Huang and contributors. Released under the MIT license.
