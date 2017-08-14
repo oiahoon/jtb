@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### version4.0.6
+  1. add some options tips
+  2. jira session judgement
+  3. loading effect
+
 ### version 4.0.4
   1. project & JQL are no longer required
   2. while JQL isn't provide the list related to the project
