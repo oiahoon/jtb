@@ -1,5 +1,9 @@
 <template>
   <nav class="archive-links pure-u-23-24">
+    <div class="go-login" :class="showLogin">
+      You are not logined.
+      <button class="pure-button-primary pure-button" @click="goJiraLogin">Login First</button>
+    </div>
     <div class="loader" :class="loadingStatus">Loading...</div>
     <ol :class="listShow">
       <item-component
@@ -23,8 +27,10 @@
       this.retriveJiraData()
       return {
         items: items,
+        currentUser: 'Unknown',
         loadingStatus: false,
-        listShow: 'hidden'
+        listShow: 'hidden',
+        showLogin: 'hidden'
       }
       // return this.sampleData()
       // return {
@@ -36,12 +42,15 @@
     },
     watch: {
       items: function(){
-        console.log(this.items)
         this.loadingStatus = 'hidden',
         this.listShow = false
       }
     },
     methods: {
+      goJiraLogin: function(){
+        var url = this.$ls.get('jiraLink')
+        chrome.tabs.create({url: url, active: true})
+      },
       sampleData: function(){
 
         function Ticket(dataHash) {
@@ -64,11 +73,33 @@
         var jql          = this.$ls.get('jql')
         var originUrl    = this.$ls.get('jiraLink')
         var apiSearchUrl = originUrl + "/rest/api/2/search"
+        var apiSessionUrl = originUrl + "/rest/auth/1/session"
         var vm = this
+
+        // session
+        this.$ajax.get(apiSessionUrl)
+          .then(function (response) {
+            console.log(response)
+            if (response.errorMessages) {
+              vm.showLogin = false
+              vm.loadingStatus = 'hidden'
+              exit;
+            }
+            else{
+              vm.currentUser = response.name
+            }
+          })
+          .catch(function (error) {
+            vm.showLogin = false
+            vm.loadingStatus = 'hidden'
+            console.log(error);
+            exit;
+          });
 
         if(!jql && this.$ls.get('project')){
           jql = 'project = '+ this.$ls.get('project')
         }
+
         this.$ajax.post(apiSearchUrl, {
             'jql': jql,
             "startAt": 0,
@@ -80,7 +111,8 @@
           }
         )
         .then(function (response) {
-          console.log(response);
+          console.log("response from jira:")
+          console.log(response)
           var tickets = response.data.issues
           tickets.forEach(function(ticket){
             vm.items.push(

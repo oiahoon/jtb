@@ -2,7 +2,17 @@
   <div class="container">
     <form @submit.prevent="onSubmit">
       <h1>Jira Tool Box<code>{{ version }}</code></h1>
-
+      <aside class="tips">
+        <em>https://jira.atlassian.com/browse/BON-43338</em>
+        <ul>
+          <li>jira link: <code>https://jira.atlassian.com/</code></li>
+          <li>project: <code>BON</code></li>
+          <li>ticket number: <code>43338</code></li>
+          <li>you can find the filter id & JQL in
+            <code>http(s)://your.jira.link/secure/ManageFilters.jspa</code>
+          </li>
+        </ul>
+      </aside>
       <div class="form-group">
         <input type="text" required="required" v-model.trim="jiraLink" />
         <label class="control-label" for="input">Jira link</label><i class="bar"></i>
@@ -16,9 +26,6 @@
       <div class="form-group">
         <textarea rows="6" required="required" v-model.trim="jql"></textarea>
         <label class="control-label" for="textarea">JQL or Filter</label><i class="bar"></i>
-        <span class="pure-form-message message">you can find the filter id & JQL in
-          <code>http(s)://your.jira.link/secure/ManageFilters.jspa</code>
-        </span>
       </div>
 
     </form>

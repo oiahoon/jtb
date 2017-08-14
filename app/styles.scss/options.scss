@@ -487,7 +487,24 @@ span.message {
  * Code Styles
  * --------------------------
 */
-
+aside{
+  background: #1f8dd6;
+  margin: 1em 0;
+  padding: 0.3em 1em;
+  border-radius: 3px;
+  color: #fff;
+}
+.tips {
+  font-size: 1.125em;
+  ul {
+    list-style-type: none;
+    margin-left: -2em;
+  }
+  code {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}
 pre {
   font-family: Consolas, Courier, monospace;
   color: #333;
