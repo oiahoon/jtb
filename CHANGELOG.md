@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### version4.0.7
+  1. add shortcut `Command+J` on Mac, `Alt+J` on Windows
+
 ### version4.0.6
   1. add some options tips
   2. jira session judgement

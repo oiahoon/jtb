@@ -1,7 +1,7 @@
 {
   "name": "__MSG_appName__",
   "short_name": "JTB",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
@@ -14,6 +14,15 @@
       "scripts/chromereload.js",
       "scripts/background.js"
     ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+J",
+        "windows": "Alt+J",
+        "mac": "Command+J"
+      }
+    }
   },
   "permissions": [
     "tabs",
