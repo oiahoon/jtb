@@ -1,5 +1,6 @@
 # Jira Tool Box (JTB)
 [![Code Climate](https://codeclimate.com/github/oiahoon/jtb/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/jtb)
+[![BCH compliance](https://bettercodehub.com/edge/badge/oiahoon/scroll-to-github-top?branch=master)](https://bettercodehub.com/)
 [![Build Status](https://travis-ci.org/oiahoon/jtb.svg?branch=master)](https://travis-ci.org/oiahoon/jtb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Waffle.io - Issues in progress](https://badge.waffle.io/oiahoon/jtb.png?label=in%20progress&title=In%20Progress)](http://waffle.io/oiahoon/jtb)
