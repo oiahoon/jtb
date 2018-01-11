@@ -16,4 +16,4 @@ chrome.runtime.onInstalled.addListener(details => {
 var project_name = Vue.ls.get('project')
 chrome.browserAction.setBadgeText({text: project_name});
 
-console.log('\'Allo \'Allo! Event Page for Browser Action');
+console.log('\'refresh \'in the Background!');

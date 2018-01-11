@@ -58,6 +58,8 @@
           this.date    = dataHash['date'];
           this.comment = dataHash['comment'];
           this.type    = dataHash['type'];
+          this.sprint  = dataHash['sprint'];
+          this.status  = dataHash['status']
         }
         var items = [
           // new Ticket({title: 'Tellus Cursus Magna Vestibulum', date: 'Nov 05, 2012', comment: 'No Comments', type: 'bug'}),
@@ -132,8 +134,19 @@
           this.assignee       = (item.fields.assignee) ? item.fields.assignee.displayName : 'nobody';
           this.dev_duedate    = (item.fields.customfield_12551) ? item.fields.customfield_12551 : '';
           this.status         = item.fields.status;
-          this.sprint         = (item.fields.customfield_11150) ? item.fields.customfield_11150 : '';
+          this.sprint         = (item.fields.customfield_11150) ? parseSprint(item.fields.customfield_11150[0]) : '';
           this.url            = originUrl + '/browse/' + item.key;
+        }
+
+        function parseSprint(sprintStr){
+          // e.g. sprintStr = "com.atlassian.greenhopper.service.sprint.Sprint@1afd67c1[id=4227,rapidViewId=705,state=FUTURE,name=VEB-Sprint 37 (2/7-2/27),startDate=<null>,endDate=<null>,completeDate=<null>,sequence=4096]"
+          var regex = /name\=(.*?)[,^]/;
+          let m;
+          var sprint = '';
+          if ((m = regex.exec(sprintStr)) !== null) {
+              sprint = m[1];
+          }
+          return sprint;
         }
       }
     }

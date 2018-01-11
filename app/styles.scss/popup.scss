@@ -6,6 +6,7 @@ $textcolor: #777;
 $hovercolor: #2690d8;
 $basefontsize: 16px;
 $statusBarWidth: 10px;
+$sprintcolor: #9e9e9e;
 
 /* loading */
 .loader {
@@ -112,6 +113,19 @@ label.seperator {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
 
+.badget {
+  margin: 0 0.1em;
+  padding: 0.3em 1em;
+  color: #fff;
+  background: #BDC3C7;
+  font-size: 80%;
+  font-style: normal;
+}
+.badget-sprint { background: #34495E; }
+.badget-assignee { background: #7F8C8D; }
+.badget-open { background: #27AE60; }
+.badget-close { background: #7F8C8D; }
+
 nav.archive-links {
   background-color: $pgcolor;
   box-sizing: content-box;
@@ -184,8 +198,12 @@ nav.archive-links {
     background-size: cover;
     background-position: center center;
   }
-  li .bug { background: #ff5722; }
-  li .story { background: #03a9f4; }
+  li {
+    .bug { background: #D35400; }
+    .story { background: #34495E; }
+    .enhancement { background: #2980D9; }
+    .esi { background: #C0392D; }
+  }
 
   a:link,
   a:visited,
@@ -216,6 +234,12 @@ nav.archive-links {
     font-size: 1em;
   }
 
-  span.link-excerpt { color: lighten($textcolor, 30%); }
-
+  span.link-excerpt {
+    color: lighten($textcolor, 30%);
+    em.sprint {
+      color: $sprintcolor;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
 }
