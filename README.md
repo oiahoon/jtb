@@ -1,7 +1,9 @@
 # Jira Tool Box (JTB)
 [![Code Climate](https://codeclimate.com/github/oiahoon/jtb/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/jtb)
+[![BCH compliance](https://bettercodehub.com/edge/badge/oiahoon/jtb?branch=master)](https://bettercodehub.com/)
 [![Build Status](https://travis-ci.org/oiahoon/jtb.svg?branch=master)](https://travis-ci.org/oiahoon/jtb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Waffle.io - Issues in progress](https://badge.waffle.io/oiahoon/jtb.png?label=in%20progress&title=In%20Progress)](http://waffle.io/oiahoon/jtb)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Foiahoon%2Fjtb?ref=badge_shield)
 ----
 ## info
@@ -39,10 +41,10 @@ Please indent using two spaces only, have a newline at the EOF and use UNIX line
 npm install --global yo gulp-cli bower
 
 # clone the repo
-git clone https://github.com/oiahoon/go-jira.git
+git clone https://github.com/oiahoon/jtb.git
 
 # cd 
-cd go-jira
+cd jtb
 
 npm install
 

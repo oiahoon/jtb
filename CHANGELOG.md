@@ -1,4 +1,10 @@
 ## CHANGELOG
+### version4.0.9
+  1. fix issues via new jira
+
+### version4.0.8
+  1. add more ticket style color bar
+  2. add tag style
 
 ### version4.0.7
   1. add shortcut `Command+J` on Mac, `Alt+J` on Windows
