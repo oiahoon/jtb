@@ -6,3 +6,4 @@
   4. include `vue-route` for muti tab
   5. provide more tips for new users
   6. <del>jira login status and requirement</del>
+  7. switch ticket status
