@@ -1,5 +1,6 @@
 # Jira Tool Box (JTB)
 [![Code Climate](https://codeclimate.com/github/oiahoon/jtb/badges/gpa.svg)](https://codeclimate.com/github/oiahoon/jtb)
+[![codebeat badge](https://codebeat.co/badges/4b65b33e-44e6-47ed-93d7-4077db7fde2f)](https://codebeat.co/projects/github-com-oiahoon-jtb-master)
 [![BCH compliance](https://bettercodehub.com/edge/badge/oiahoon/jtb?branch=master)](https://bettercodehub.com/)
 [![Build Status](https://travis-ci.org/oiahoon/jtb.svg?branch=master)](https://travis-ci.org/oiahoon/jtb)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
