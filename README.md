@@ -42,10 +42,10 @@ Please indent using two spaces only, have a newline at the EOF and use UNIX line
 npm install --global yo gulp-cli bower
 
 # clone the repo
-git clone https://github.com/oiahoon/go-jira.git
+git clone https://github.com/oiahoon/jtb.git
 
 # cd 
-cd go-jira
+cd jtb
 
 npm install
 

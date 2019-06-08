@@ -1,4 +1,6 @@
 ## CHANGELOG
+### version4.0.9
+  1. fix issues via new jira
 
 ### version4.0.8
   1. add more ticket style color bar

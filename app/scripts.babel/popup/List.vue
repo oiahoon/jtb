@@ -106,10 +106,17 @@
             'jql': jql,
             "startAt": 0,
             "maxResults": 50,
-            "fields":["id","key", "duedate", "summary",
-                      "progress","timespent", "status", "customfield_12551",
-                      // "subtasks", "fixVersions",
-                      "assignee", "customfield_11150", "issuetype"]
+            "fields":[
+                      // "*all"
+                      "id","key", "duedate", "summary",
+                      "progress","timespent", "status",
+                      // "customfield_12551",
+                      "duedate",
+                      "subtasks", "fixVersions",
+                      "assignee",
+                      "customfield_14400",
+                      "issuetype"
+                      ]
           }
         )
         .then(function (response) {
@@ -132,9 +139,9 @@
           this.issuetype      = (item.fields.issuetype) ? item.fields.issuetype.name : 'none';
           this.summary        = item.fields.summary;
           this.assignee       = (item.fields.assignee) ? item.fields.assignee.displayName : 'nobody';
-          this.dev_duedate    = (item.fields.customfield_12551) ? item.fields.customfield_12551 : '';
+          this.duedate        = (item.fields.duedate) ? item.fields.duedate : '';
           this.status         = item.fields.status;
-          this.sprint         = (item.fields.customfield_11150) ? parseSprint(item.fields.customfield_11150[0]) : '';
+          this.sprint         = (item.fields.customfield_14400) ? parseSprint(item.fields.customfield_14400[0]) : '';
           this.url            = originUrl + '/browse/' + item.key;
         }
 
