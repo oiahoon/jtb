@@ -1,0 +1,61 @@
+{
+  "name": "__MSG_appName__",
+  "short_name": "JTB",
+  "version": "4.0.7",
+  "manifest_version": 3,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "action": {
+    "default_icon": {
+      "19": "images/icon.png",
+      "38": "images/icon.png"
+    },
+    "default_title": "Jira Tool Box",
+    "default_popup": "popup/index.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+J",
+        "windows": "Alt+J",
+        "mac": "Command+J"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "*://*.google.com/"
+  ],
+  "options_page": "options/index.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["images/icon.png"],
+    "matches": ["<all_urls>"]
+  }]
+}

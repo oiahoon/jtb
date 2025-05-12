@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Jira Tool Box",
+  "version": "1.0.0",
+  "description": "A powerful tool for Jira users",
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*.atlassian.net/*"
+  ],
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "src/assets/icon16.png",
+      "32": "src/assets/icon32.png",
+      "48": "src/assets/icon48.png",
+      "128": "src/assets/icon128.png"
+    }
+  },
+  "options_page": "src/options/index.html",
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.atlassian.net/*"],
+      "js": ["src/content/index.js"],
+      "css": ["src/content/style.css"]
+    }
+  ],
+  "icons": {
+    "16": "src/assets/icon16.png",
+    "32": "src/assets/icon32.png",
+    "48": "src/assets/icon48.png",
+    "128": "src/assets/icon128.png"
+  }
+}

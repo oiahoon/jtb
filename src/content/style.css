@@ -1,0 +1,40 @@
+.jtb-quick-actions {
+  display: inline-flex;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.jtb-quick-actions button {
+  padding: 4px 8px;
+  border: 1px solid #DFE1E6;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.jtb-quick-actions button:hover {
+  background-color: #F4F5F7;
+}
+
+.jtb-quick-actions button:active {
+  background-color: #EBECF0;
+}
+
+.jtb-tooltip {
+  position: absolute;
+  padding: 4px 8px;
+  background: #172B4D;
+  color: white;
+  border-radius: 3px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.jtb-tooltip.visible {
+  opacity: 1;
+}
